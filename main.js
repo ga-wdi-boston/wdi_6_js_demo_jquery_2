@@ -29,6 +29,33 @@ $(document).ready(function() {
   $('#today-weather').html('Cloudy');
   $('#today-weather').addClass('blue');
 
+  // Basic click events
+  // $('h1').click(function() {
+  //   alert("You clicked on the title");
+  // });
+
+  // If we have a longer function, do this instead:
+  var alertAndFadeOnClick = function() {
+    alert("You clicked it, now it will fade");
+    $(this).hide('slow');
+  };
+
+  $('h1').click(alertAndFadeOnClick);
+
+  // Take an element, and toggle between the blue and green classes when it is clicked
+  var changeColorOnClick = function() {
+    $(this).toggleClass('clicked');
+  };
+
+  $('h2').click(changeColorOnClick);
+
+  $('h2').hover(changeColorOnClick);
+
+  var somethingHappens = function() {
+    var weather = $(this).val();
+  };
+
+  $('#forecast').change(somethingHappens);
 });
 
 
