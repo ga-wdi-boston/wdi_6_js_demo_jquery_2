@@ -1,7 +1,7 @@
 var TodoApp = {};
 
 
-TodoApp.todoItems = [];
+TodoApp.items = ["Walk Dog", "Goto 10", "Goto 30"];
 
 TodoApp.addItem = function() {
 
@@ -12,11 +12,18 @@ TodoApp.removeItem = function() {
 };
 
 TodoApp.renderItems = function() {
-  debugger
+  var $list = $('#todos');
+  for(var i = 0; i < this.items.length; i++) {
+    $('<div>').addClass('todo').html(this.items[i]).appendTo($list);
+  }
+
 };
 
 TodoApp.markCompleted = function() {
 
 };
 
-TodoApp.renderItems();
+$(document).ready(function() {
+  TodoApp.renderItems();
+});
+
