@@ -11,10 +11,14 @@ TodoApp.addItem = function() {
 
 TodoApp.removeItem = function(event) {
   event.preventDefault();
-  console.log(this);
+  $(this).parent().remove();
 };
 
-TodoApp.markCompleted = function() {};
+TodoApp.markCompleted = function() {
+  var task = $(this).parent().clone();
+  $('#completed').append(task);
+  $(this).parent().remove();
+};
 
 // Constructor Function
 // Gives me the ability to call:
@@ -23,23 +27,31 @@ TodoApp.markCompleted = function() {};
 // Kinda like our initialize method in Ruby
 var TodoItem = function(name) {
   this.name = name;
+  this.id = this.__proto__.itemId;
+  this.__proto__.itemId += 1; // This weird
   this.render();
 };
 
 TodoItem.prototype = {
+  itemId: 1,
   render: function() {
     TodoApp.$list.append(this.toHTML());
   },
   toHTML: function() {
-    return $('<div>').addClass('todo').html(this.name).append(this.deleteButton());
+    return $('<div>').addClass('todo')
+                    .attr('todo-id', this.id)
+                    .html(this.name)
+                    .append(this.completeButton())
+                    .append(this.deleteButton());
   },
-  completeButton: function() {return 'Complete';},
-  deleteButton: function() {return " <a href='http://ga.co' class='delete-button'>Delete</a>";}
+  completeButton: function() {return " <a href='#' class='complete-button'>Complete</a>";},
+  deleteButton: function() {return " <a href='#' class='delete-button'>Delete</a>";}
 }
 
 $(document).ready(function() {
   TodoApp.$list = $('#todos');
-  TodoApp.$list.on('click', '.delete-button', TodoApp.removeItem); // Event Delegation
+  TodoApp.$list.parent().on('click', '.delete-button', TodoApp.removeItem); // Event Delegation
+  TodoApp.$list.on('click', '.complete-button', TodoApp.markCompleted); // Event Delegation
   $('#new-todo').change(TodoApp.addItem)
 });
 
