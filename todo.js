@@ -1,17 +1,22 @@
-var todoItems = [];
+var TodoApp = {};
 
-var addItem = function() {
 
-};
+TodoApp.todoItems = [];
 
-var removeItem = function() {
-
-};
-
-var renderItems = function() {
+TodoApp.addItem = function() {
 
 };
 
-var markCompleted = function() {
+TodoApp.removeItem = function() {
 
 };
+
+TodoApp.renderItems = function() {
+  debugger
+};
+
+TodoApp.markCompleted = function() {
+
+};
+
+TodoApp.renderItems();
