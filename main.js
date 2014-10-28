@@ -51,11 +51,14 @@ $(document).ready(function() {
 
   $('h2').hover(changeColorOnClick);
 
-  var somethingHappens = function() {
+  // Refactor this to have a better name
+  // And make it update the today-weather based on what's in the box
+  var updateWeather = function() {
     var weather = $(this).val();
+    $('#today-weather').html(weather);
   };
 
-  $('#forecast').change(somethingHappens);
+  $('#forecast').change(updateWeather);
 });
 
 
