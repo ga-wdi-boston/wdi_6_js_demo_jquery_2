@@ -9,7 +9,10 @@ TodoApp.addItem = function() {
   TodoApp.items.push(item);
 };
 
-TodoApp.removeItem = function() {};
+TodoApp.removeItem = function(event) {
+  event.preventDefault();
+  console.log(this);
+};
 
 TodoApp.markCompleted = function() {};
 
@@ -28,14 +31,25 @@ TodoItem.prototype = {
     TodoApp.$list.append(this.toHTML());
   },
   toHTML: function() {
-    return $('<div>').addClass('todo').html(this.name);
+    return $('<div>').addClass('todo').html(this.name).append(this.deleteButton());
   },
   completeButton: function() {return 'Complete';},
-  deleteButton: function() {return 'Delete';}
+  deleteButton: function() {return " <a href='http://ga.co' class='delete-button'>Delete</a>";}
 }
 
 $(document).ready(function() {
   TodoApp.$list = $('#todos');
+  TodoApp.$list.on('click', '.delete-button', TodoApp.removeItem); // Event Delegation
   $('#new-todo').change(TodoApp.addItem)
 });
+
+
+
+
+
+
+
+
+
+
 
